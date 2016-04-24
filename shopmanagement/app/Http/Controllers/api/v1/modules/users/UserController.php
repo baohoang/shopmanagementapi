@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -16,7 +17,20 @@ class UserController extends Controller
     //
     public function login(Request $request)
     {
+        $statusCode = 500;
+        $response = [];
+
         $credentials = $request->only('email', 'password');
+
+
+        $user = User::check($credentials);
+        if ($user) {
+            $level = $user->staffLevel();
+            if (!$level) {
+
+            }
+        }
+        return Response::json($response, $statusCode);
 
         try {
             // attempt to verify the credentials and create a token for the user

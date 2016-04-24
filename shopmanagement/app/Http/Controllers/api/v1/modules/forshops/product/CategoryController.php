@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Http\Controllers\api\v1\modules\forshops\product;
+
+use App\Models\Category;
+use Illuminate\Http\Request;
+
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use JWTAuth;
+
+class CategoryController extends Controller
+{
+    public function index(Request $request)
+    {
+        $customClaims = JWTAuth::parseToken()->getPayload();
+        $shop_id = $customClaims['shop_id'];
+        return Category::listByShop($shop_id);
+    }
+
+    public function update(Request $request)
+    {
+        $params = $request->all();
+        $category_id = $params['id'];
+        $category = Category::find($category_id);
+        $category->name = $params['name'];
+        if ($category->save()) {
+            return response(['message' => 'success'], 200);
+        }
+        return response(['message' => 'error'], 500);
+    }
+
+    public function delete(Request $request)
+    {
+        $category_id = $request->input('category');
+        $category = Category::find($category_id);
+        if ($category->delete()) {
+            return response(['message' => 'success'], 200);
+        }
+        return response(['message' => 'error'], 500);
+    }
+}

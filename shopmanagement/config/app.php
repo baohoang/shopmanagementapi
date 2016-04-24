@@ -160,6 +160,8 @@ return [
         //Json Web Token
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
+        Barryvdh\Cors\ServiceProvider::class
+
     ],
 
     /*
