@@ -1,12 +1,12 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Hoàng
+ * User: Hoï¿½ng
  * Date: 4/12/2016
  * Time: 5:31 PM
  */
 Route::group(['prefix' => 'api/v1/forshops'], function () {
-//    Route::get('/insert', 'api\v1\modules\forshops\login\LoginController@insert');
+    Route::get('/insert', 'api\v1\modules\forshops\login\LoginController@insert');
 
     Route::post('login', 'api\v1\modules\forshops\login\LoginController@login');
 

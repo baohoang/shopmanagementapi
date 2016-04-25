@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1\modules\forshops\login;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use JWTAuth;
 
 class LoginController extends Controller
@@ -16,7 +17,6 @@ class LoginController extends Controller
         $response = [];
 
         $credentials = $request->only('email', 'password');
-
 
         $user = User::checkAccount($credentials);
         if ($user) {
@@ -45,6 +45,6 @@ class LoginController extends Controller
 
     public function insert()
     {
-        User::insert(['username' => 'admin', 'password' => Hash::make('1234')]);
+        User::insert(['email' => 'bao@gmail.com', 'password' => Hash::make('123456')]);
     }
 }
