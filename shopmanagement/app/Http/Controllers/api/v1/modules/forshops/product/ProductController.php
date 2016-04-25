@@ -81,13 +81,17 @@ class ProductController extends Controller
         $product->colors = $params['colors'];
         $product->sale_off = $params['sale_off'];
         $product->discount = $params['discount'];
+        $product->quantity = $params['quantity'];
         $product->description = $params['description'];
+        $product->category_id = $params['category_id'];
         if ($product->save()) {
-            $images = $params['images'];
-            foreach ($images as $image) {
-                $img = ProductImages::find($image['id']);
-                $img->is_favicon = $image['is_favicon'];
-                $img->save();
+            if (isset($params['images'])) {
+                $images = $params['images'];
+                foreach ($images as $image) {
+                    $img = ProductImages::find($image['id']);
+                    $img->is_favicon = $image['is_favicon'];
+                    $img->save();
+                }
             }
             return response(['message' => 'success'], 200);
         }
@@ -101,6 +105,26 @@ class ProductController extends Controller
         $product = Product::find($product_id);
         if ($product->delete()) {
             return response(['message' => 'success'], 200);
+        }
+        return response(['message' => 'error'], 500);
+    }
+
+    public function store(Request $request)
+    {
+        $params = $request->all();
+        $product = new Product();
+        $product->name = $params['name'];
+        $product->price = $params['price'];
+        $product->colors = $params['colors'];
+        $product->sale_off = $params['sale_off'];
+        $product->discount = $params['discount'];
+        $product->quantity = $params['quantity'];
+        $product->description = $params['description'];
+        $product->category_id = $params['category_id'];
+        $customClaims = JWTAuth::parseToken()->getPayload();
+        $product->shop_id = $customClaims['shop_id'];
+        if ($product->save()) {
+            return response(['message' => 'success', 'product' => $product], 200);
         }
         return response(['message' => 'error'], 500);
     }

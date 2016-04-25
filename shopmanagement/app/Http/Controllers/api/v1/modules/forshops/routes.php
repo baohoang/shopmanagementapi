@@ -16,11 +16,13 @@ Route::group(['prefix' => 'api/v1/forshops'], function () {
 
 
         Route::get('categories', 'api\v1\modules\forshops\product\CategoryController@index');
+        Route::post('categories', 'api\v1\modules\forshops\product\CategoryController@store');
         Route::put('categories', 'api\v1\modules\forshops\product\CategoryController@update');
         Route::delete('categories', 'api\v1\modules\forshops\product\CategoryController@delete');
 
 
         Route::get('products', 'api\v1\modules\forshops\product\ProductController@index');
+        Route::post('products', 'api\v1\modules\forshops\product\ProductController@store');
         Route::put('products', 'api\v1\modules\forshops\product\ProductController@update');
         Route::delete('products', 'api\v1\modules\forshops\product\ProductController@delete');
 

@@ -44,7 +44,11 @@ class Product extends Model
             if (isset($search) && $search != '') {
                 $query->where('name', 'LIKE', '%' . $search . '%');
             }
-            return $query->paginate($limit);
+            $paginate = $query->paginate($limit);
+            foreach ($paginate as $key => $val) {
+                $val->images;
+            }
+            return $paginate;
         }
         return $query->get();
     }
