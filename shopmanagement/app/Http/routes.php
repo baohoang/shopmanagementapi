@@ -18,4 +18,5 @@ Route::get('/', function () {
 
 require app_path('Http\Controllers\api\v1\modules\users\routes.php');
 require app_path('Http\Controllers\api\v1\modules\forshops\routes.php');
+require app_path('Http\Controllers\api\v1\modules\forwebsite\routes.php');
 
