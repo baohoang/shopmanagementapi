@@ -10,6 +10,10 @@ use JWTAuth;
 class LoginController extends Controller
 {
     //
+    public function test(Request $request){
+        $statusCode = 500;
+        return response(['message' => 'success'], 200);
+    }
     public function login(Request $request)
     {
         $statusCode = 500;
